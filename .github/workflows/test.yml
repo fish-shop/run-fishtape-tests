@@ -1,0 +1,35 @@
+name: tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+  schedule:
+    - cron: '30 19 * * *'
+jobs:
+  tests:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install fish shell
+        uses: fish-actions/install-fish@v1
+      - name: Create test file
+        run: |
+          cat << EOF > test.fish
+          @test "truth test" (true) $status -eq 0
+          EOF
+      - name: Run fishtape tests
+        uses: ./
+      - name: Check fishtape installed
+        run: type -q fishtape
+        shell: fish {0}
