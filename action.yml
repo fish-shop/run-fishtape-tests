@@ -1,0 +1,20 @@
+name: 'fish-shop/run-fishtape-tests'
+description: 'A GitHub action for running fishtape tests'
+branding:
+  icon: 'check-square'
+  color: 'green'
+inputs:
+  pattern:
+    description: 'File name pattern'
+    required: false
+    default: '**.fish'
+runs:
+  using: 'composite'
+  steps:
+    - uses: fish-shop/install-plugin@v1
+      with:
+        plugin-manager: fisher
+        plugins: jorgebucaran/fishtape
+    - name: Run fishtape tests
+      run: fishtape ${{ inputs.pattern }}
+      shell: fish {0}
