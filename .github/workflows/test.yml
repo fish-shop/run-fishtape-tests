@@ -25,7 +25,7 @@ jobs:
         uses: fish-actions/install-fish@v1
       - name: Create test file
         run: |
-          cat << EOF > test.fish
+          cat << 'EOF' > test.fish
           @test "truth test" (true) $status -eq 0
           EOF
       - name: Run fishtape tests
