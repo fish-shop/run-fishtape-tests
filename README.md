@@ -4,6 +4,8 @@
 
 A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests.
 
+<img src="example.png">
+
 ## Prerequisites
 
 This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-actions/install-fish](https://github.com/fish-actions/install-fish) action.
