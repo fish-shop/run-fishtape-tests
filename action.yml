@@ -17,6 +17,7 @@ runs:
         plugins: jorgebucaran/fishtape
     - name: Install tap-diff
       run: npm install -g tap-diff
+      shell: fish {0}
     - name: Run fishtape tests
       run: fishtape ${{ inputs.pattern }} | tap-diff
       shell: fish {0}
