@@ -15,6 +15,8 @@ runs:
       with:
         plugin-manager: fisher
         plugins: jorgebucaran/fishtape
+    - name: Install tap-diff
+      run: npm install -g tap-diff
     - name: Run fishtape tests
-      run: fishtape ${{ inputs.pattern }}
+      run: fishtape ${{ inputs.pattern }} | tap-diff
       shell: fish {0}
