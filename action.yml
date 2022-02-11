@@ -19,5 +19,8 @@ runs:
       run: npm install -g tap-diff
       shell: fish {0}
     - name: Run fishtape tests
-      run: fishtape ${{ inputs.pattern }} | tap-diff
+      run: |
+        set -gx TERM xterm-256color
+        set -gx FORCE_COLOR 2
+        fishtape ${{ inputs.pattern }} | tap-diff
       shell: fish {0}
