@@ -1,8 +1,14 @@
+<img alt="fish" src="images/fish-market.png" width="160" align="right">
+
 # fish-shop/run-fishtape-tests
 
 [![Tests](https://img.shields.io/github/workflow/status/fish-shop/run-fishtape-tests/tests?color=brightgreen&label=tests)](https://github.com/fish-shop/run-fishtape-tests/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/run-fishtape-tests)](https://github.com/fish-shop/run-fishtape-tests/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/run-fishtape-tests/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
 
-A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests. TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for prettier output:
+A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests. TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability.
+
+<hr>
+
+Here's an example from the test workflow for [Pond](https://github.com/marcransome/pond):
 
 <img src="example.png">
 
@@ -58,6 +64,10 @@ A number of related composite actions are also available from the [fish-shop](ht
 * [fish-shop/install-plugin](https://github.com/fish-shop/install-plugin) - A GitHub action for installing fish shell plugins
 * [fish-shop/install-plugin-manager](https://github.com/fish-shop/install-plugin-manager) - A GitHub action for installing a fish shell plugin manager
 * [fish-shop/syntax-check](https://github.com/fish-shop/syntax-check) - A GitHub action for syntax checking fish shell files
+
+## Acknowledgements
+
+ * Fish market icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)
 
 ## License
 `fish-shop/run-fishtape-tests` is provided under the terms of the [MIT License](https://opensource.org/licenses/mit-license.php).
