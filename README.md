@@ -34,7 +34,7 @@ By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension ar
     pattern: tests/**.fish
 ```
 
-Multiple space-separated `pattern` values are supported and can include [wildcards](http://fishshell.com/docs/current/index.html#wildcards-globbing) and [brace expansion](http://fishshell.com/docs/current/index.html#brace-expansion):
+Multiple space-separated `pattern` values are supported and can include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
 
 ```yaml
 - name: Run Fishtape tests
