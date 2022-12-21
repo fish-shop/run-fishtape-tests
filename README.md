@@ -2,7 +2,7 @@
 
 # fish-shop/run-fishtape-tests
 
-[![Tests](https://img.shields.io/github/workflow/status/fish-shop/run-fishtape-tests/tests?color=brightgreen&label=tests)](https://github.com/fish-shop/run-fishtape-tests/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/run-fishtape-tests)](https://github.com/fish-shop/run-fishtape-tests/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/run-fishtape-tests/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
+[![Tests](https://img.shields.io/github/actions/workflow/status/fish-shop/run-fishtape-tests/test.yml?branch=main&color=brightgreen&label=tests)](https://github.com/fish-shop/run-fishtape-tests/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/run-fishtape-tests)](https://github.com/fish-shop/run-fishtape-tests/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/run-fishtape-tests/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
 
 A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests. TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability.
 
