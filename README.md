@@ -49,7 +49,7 @@ By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff
 - name: Run Fishtape tests (raw TAP output)
   uses: fish-shop/run-fishtape-tests@v1
   with:
-    pattern: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
+    pattern: tests/**.fish
     raw-output: 'true'
 ```
 
