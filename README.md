@@ -4,7 +4,7 @@
 
 [![Tests](https://img.shields.io/github/actions/workflow/status/fish-shop/run-fishtape-tests/test.yml?branch=main&color=brightgreen&label=tests)](https://github.com/fish-shop/run-fishtape-tests/actions) [![Issues](https://img.shields.io/github/issues/fish-shop/run-fishtape-tests)](https://github.com/fish-shop/run-fishtape-tests/issues) [![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen.svg)](https://github.com/fish-shop/run-fishtape-tests/network/dependencies) [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/mit-license.php) [![fish](https://img.shields.io/badge/fish-3.2.2-blue)](https://fishshell.com)
 
-A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests. TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability.
+A GitHub action for running [Fishtape](https://github.com/jorgebucaran/fishtape) tests.
 
 <hr>
 
@@ -41,6 +41,16 @@ Multiple space-separated `pattern` values are supported and can include [wildcar
   uses: fish-shop/run-fishtape-tests@v1
   with:
     pattern: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
+```
+
+By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability. To disable this functionality and produce raw TAP output set `raw-output` to `'true'`:
+
+```yaml
+- name: Run Fishtape tests (raw TAP output)
+  uses: fish-shop/run-fishtape-tests@v1
+  with:
+    pattern: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
+    raw-output: 'true'
 ```
 
 ## Action versions
