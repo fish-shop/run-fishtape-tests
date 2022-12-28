@@ -8,6 +8,11 @@ inputs:
     description: 'File name pattern'
     required: false
     default: '**.fish'
+  raw-output:
+    description: 'Produce raw TAP output'
+    required: false
+    default: 'false'
+
 runs:
   using: 'composite'
   steps:
@@ -22,5 +27,10 @@ runs:
       run: |
         set -gx TERM xterm-256color
         set -gx FORCE_COLOR 2
-        fishtape ${{ inputs.pattern }} | tap-diff
+        switch ${{ inputs.raw-output }}
+            case true
+                fishtape ${{ inputs.pattern }}
+            case '*'
+                fishtape ${{ inputs.pattern }} | tap-diff
+        end
       shell: fish {0}
