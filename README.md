@@ -14,7 +14,7 @@ Here's an example from the test workflow for [Pond](https://github.com/marcranso
 
 ## Prerequisites
 
-This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-actions/install-fish](https://github.com/fish-actions/install-fish) action.
+This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
 
 ## Usage
 
@@ -61,7 +61,7 @@ Use one of the following patterns when specifying the version reference for this
 |----------|-----------|------------------------------------------------------------------------|
 | `vX`     | `v1`      | the latest `v1.*` release including non-breaking changes and bug fixes |
 | `vX.Y`   | `v1.1`    | the latest `v1.1.*` release including bug fixes                        |
-| `vX.Y.Z` | `v1.1.0`  | the `v1.1.0` release only                                      |                
+| `vX.Y.Z` | `v1.1.0`  | the `v1.1.0` release only                                              |
 
 > [!TIP]
 > The recommended pattern is `vX` (e.g. `v1`). This will ensure that the version of the action used in your workflow includes the latest non-breaking changes and bug fixes, and guarantees compatibility with previous versions of that major release number.
