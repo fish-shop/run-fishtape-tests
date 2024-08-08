@@ -16,7 +16,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: fish-shop/install-plugin@50e6f71669353e8ab017a44014e724f907ae5f52 # v2.3.0
+    - uses: fish-shop/install-plugin@9b1d802d389c0226fe523ef0d214f3e50ec31087 # v2.3.1
       with:
         plugin-manager: fisher
         plugins: jorgebucaran/fishtape
