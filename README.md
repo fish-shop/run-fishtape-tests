@@ -25,7 +25,7 @@ Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/
   uses: fish-shop/run-fishtape-tests@v1
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are recursively tested. To specify a different file pattern to match against, provide a value for the `pattern` input. For example, to check all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
@@ -34,7 +34,7 @@ By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension ar
     pattern: tests/**.fish
 ```
 
-Multiple space-separated `pattern` values are supported and can include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
+Each pattern value may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
 
 ```yaml
 - name: Run Fishtape tests
