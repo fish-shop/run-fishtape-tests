@@ -22,14 +22,14 @@ Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/r
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
 ```
 
 By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values using the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
     patterns: tests/**.fish
 ```
@@ -38,7 +38,7 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
     patterns: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
 ```
@@ -47,7 +47,7 @@ By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff
 
 ```yaml
 - name: Run Fishtape tests (raw TAP output)
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
     patterns: tests/**.fish
     raw-output: 'true'
