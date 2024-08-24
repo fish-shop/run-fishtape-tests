@@ -12,6 +12,16 @@ inputs:
     description: 'Produce raw TAP output'
     required: false
     default: 'false'
+outputs:
+  total:
+    description: "Total number of tests executed"
+    value: ${{ steps.run-fishtape-tests.outputs.total }}
+  passed:
+    description: "Number of tests passed"
+    value: ${{ steps.run-fishtape-tests.outputs.passed }}
+  failed:
+    description: "Number of tests failed"
+    value: ${{ steps.run-fishtape-tests.outputs.failed }}
 runs:
   using: 'composite'
   steps:
@@ -24,6 +34,7 @@ runs:
       run: npm install -g tap-diff
       shell: fish {0}
     - name: Run fishtape tests
+      id: run-fishtape-tests
       env:
         PATTERNS: ${{ inputs.patterns }}
         RAW_OUTPUT: ${{ inputs.raw-output }}
@@ -41,10 +52,26 @@ runs:
 
         switch $raw_output
             case true
-                fishtape $files
+                fishtape $files | tee output
             case false
-                fishtape $files | tap-diff
+                fishtape $files | tee output | tap-diff
             case '*'
-                echo "Unrecognised raw output option: '$raw_output'" >&2; and exit 1
+                echo "Unrecognised raw output option: '$raw_output'" >&2
+                exit 1
         end
+
+        set total (tail -n 4 output | sed -rn 's/^[[:digit:]]\.\.([[:digit:]])+$/\1/p')
+        set passed (tail -n 4 output | sed -rn 's/^# pass ([[:digit:]]+)$/\1/p')
+        set failed (tail -n 4 output | sed -rn 's/^# fail ([[:digit:]]+)$/\1/p')
+
+        for param in total passed failed
+          echo "value of $param is $$param"
+          if test -z "$$param"
+            set $param 0
+          end
+        end
+
+        echo "total=$total" >> "$GITHUB_OUTPUT"
+        echo "passed=$passed" >> "$GITHUB_OUTPUT"
+        echo "failed=$failed" >> "$GITHUB_OUTPUT"
       shell: fish {0}

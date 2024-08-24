@@ -14,44 +14,63 @@ Here's an example from the test workflow for [Pond](https://github.com/marcranso
 
 ## Prerequisites
 
-This action requires the [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
+This action requires [fish shell](https://fishshell.com). You can install it using the [fish-shop/install-fish-shell](https://github.com/fish-shop/install-fish-shell) action.
 
 ## Usage
 
-Add a suitable `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
+Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions) as shown below:
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values using the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
-    pattern: tests/**.fish
+    patterns: tests/**.fish
 ```
 
 Each pattern value may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansion](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion):
 
 ```yaml
 - name: Run Fishtape tests
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
-    pattern: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
+    patterns: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
 ```
 
 By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability. To disable this functionality and produce raw TAP output set `raw-output` to `'true'`:
 
 ```yaml
 - name: Run Fishtape tests (raw TAP output)
-  uses: fish-shop/run-fishtape-tests@v1
+  uses: fish-shop/run-fishtape-tests@v2
   with:
-    pattern: tests/**.fish
+    patterns: tests/**.fish
     raw-output: 'true'
 ```
+
+## Inputs
+
+Configure the action using the following inputs:
+
+| Name         | Description                            | Default               |
+|--------------|----------------------------------------|-----------------------|
+| `patterns`   | A space-separated list of file patterns to match against when running tests; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
+| `raw-output` | The string value `'true'` or `'false'` indicating whether to generate raw [TAP](https://testanything.org/) output or not; output is prettified using [tap-diff](https://github.com/axross/tap-diff) when `'false'` | `false` |
+
+## Outputs
+
+The following outputs are made available to subsequent steps in a workflow:
+
+| Name     | Description                     |
+|----------|---------------------------------|
+| `total`  | The total number of tests run   |
+| `passed` | The number of tests that passed |
+| `failed` | The number of tests that failed |
 
 ## Action versions
 
