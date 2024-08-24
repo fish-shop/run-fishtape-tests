@@ -25,7 +25,7 @@ Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/r
   uses: fish-shop/run-fishtape-tests@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values using the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
