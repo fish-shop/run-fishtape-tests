@@ -72,6 +72,12 @@ The following outputs are made available to subsequent steps in a workflow:
 | `passed` | The number of tests that passed |
 | `failed` | The number of tests that failed |
 
+## Job summary
+
+This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the run summary page of a workflow job:
+
+<img alt="job-summary" src="images/job-summary.png" width="909">
+
 ## Action versions
 
 Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/run-fishtape-tests@{ref}`):
