@@ -60,7 +60,7 @@ runs:
                 exit 1
         end
 
-        set total (tail -n 4 output | sed -rn 's/^[[:digit:]]\.\.([[:digit:]])+$/\1/p')
+        set total (tail -n 4 output | sed -rn 's/^[[:digit:]]\.\.([[:digit:]]+)$/\1/p')
         set passed (tail -n 4 output | sed -rn 's/^# pass ([[:digit:]]+)$/\1/p')
         set failed (tail -n 4 output | sed -rn 's/^# fail ([[:digit:]]+)$/\1/p')
 
