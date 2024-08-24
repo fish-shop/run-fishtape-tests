@@ -53,6 +53,25 @@ By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff
     raw-output: 'true'
 ```
 
+## Inputs
+
+Configure the action using the following inputs:
+
+| Name         | Description                            | Default               |
+|--------------|----------------------------------------|-----------------------|
+| `patterns`   | A space-separated list of file patterns to match against when running tests; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
+| `raw-output` | The string value `'true'` or `'false'` indicating whether to generate raw TAP output or not; by default, output is prettified using [tap-diff](https://github.com/axross/tap-diff) | `false` |
+
+## Outputs
+
+The following outputs are made available to subsequent steps in a workflow:
+
+| Name     | Description                        |
+|----------|------------------------------------|
+| `total`  | The total number of tests executed |
+| `passed` | The number of tests that passed    |
+| `failed` | The number of tests that failed    |
+
 ## Action versions
 
 Use one of the following patterns when specifying the version reference for this action in your workflow (i.e. the `{ref}` value in `uses: fish-shop/run-fishtape-tests@{ref}`):

@@ -31,10 +31,48 @@ jobs:
       - name: Create test file
         run: |
           cat << 'EOF' > test.fish
-          @test "truth test" (true) $status -eq 0
+          @test "passing test" (true) $status -eq 0
+          @test "passing test" (true) $status -eq 0
+          @test "passing test" (true) $status -eq 0
+          @test "failing test" (false) $status -eq 0
           EOF
       - name: Run fishtape tests
+        id: run-fishtape-tests
         uses: ./
       - name: Check fishtape installed
         run: type -q fishtape
+        shell: fish {0}
+      - name: Check output parameters
+        env:
+          TOTAL: ${{ steps.run-fishtape-tests.outputs.total }}
+          PASSED: ${{ steps.run-fishtape-tests.outputs.passed }}
+          FAILED: ${{ steps.run-fishtape-tests.outputs.failed }}
+        run: |
+          set failures 0
+
+          set expected_total 4
+          if test "$TOTAL" != "$expected_total"
+              echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
+              set failures (math $failures + 1)
+          else
+              echo "Output parameter 'total' equals expected value $expected_total"
+          end
+
+          set expected_passes 3
+          if test "$PASSED" != "$expected_passes"
+            echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
+            set failures (math $failures + 1)
+          else
+              echo "Output parameter 'passed' equals expected value $expected_passes"
+          end
+
+          set expected_failures 1
+          if test "$FAILED" != "$expected_failures"
+            echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
+            set failures (math $failures + 1)
+          else
+              echo "Output parameter 'failed' equals expected value $expected_failures"
+          end
+
+          exit $failures
         shell: fish {0}
