@@ -65,7 +65,6 @@ runs:
         set failed (tail -n 4 output | sed -rn 's/^# fail ([[:digit:]]+)$/\1/p')
 
         for param in total passed failed
-          echo "value of $param is $$param"
           if test -z "$$param"
             set $param 0
           end
@@ -74,4 +73,22 @@ runs:
         echo "total=$total" >> "$GITHUB_OUTPUT"
         echo "passed=$passed" >> "$GITHUB_OUTPUT"
         echo "failed=$failed" >> "$GITHUB_OUTPUT"
+      shell: fish {0}
+    - name: Generate job summary
+      env:
+        TOTAL: ${{ steps.run-fishtape-tests.outputs.total }}
+        PASSED: ${{ steps.run-fishtape-tests.outputs.passed }}
+        FAILED: ${{ steps.run-fishtape-tests.outputs.failed }}
+      run: |
+        if test "$FAILED" = "0"
+          set result ":white_check_mark: Pass"
+        else
+          set result ":x: Fail"
+        end
+
+        echo "### Test results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Test result :microscope: | Passed :white_check_mark: | Failed :x: |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------------------------|---------------------------|------------|" >> $GITHUB_STEP_SUMMARY
+        echo "| $result                  | $PASSED                   | $FAILED    |" >> $GITHUB_STEP_SUMMARY
       shell: fish {0}
