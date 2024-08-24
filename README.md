@@ -25,7 +25,7 @@ Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/r
   uses: fish-shop/run-fishtape-tests@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values using the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
@@ -71,6 +71,12 @@ The following outputs are made available to subsequent steps in a workflow:
 | `total`  | The total number of tests run   |
 | `passed` | The number of tests that passed |
 | `failed` | The number of tests that failed |
+
+## Job summary
+
+This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the workflow run summary page:
+
+<img alt="job-summary" src="images/job-summary.png" width="909">
 
 ## Action versions
 
