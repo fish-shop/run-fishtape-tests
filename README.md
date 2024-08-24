@@ -74,7 +74,7 @@ The following outputs are made available to subsequent steps in a workflow:
 
 ## Job summary
 
-This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the run summary page of a workflow job:
+This action generates a [job summary](https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/) at run-time which can be viewed from the workflow run summary page:
 
 <img alt="job-summary" src="images/job-summary.png" width="909">
 
