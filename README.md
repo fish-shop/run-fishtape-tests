@@ -61,6 +61,7 @@ Configure the action using the following inputs:
 |--------------|----------------------------------------|-----------------------|
 | `patterns`   | A space-separated list of file patterns to match against when running tests; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
 | `raw-output` | The string value `'true'` or `'false'` indicating whether to generate raw [TAP](https://testanything.org/) output or not; output is prettified using [tap-diff](https://github.com/axross/tap-diff) when `'false'` | `false` |
+| `title`      | The title to display in the job summary; can be used to distinguish multiple summaries generated from a single workflow  | `Test results` |
 
 ## Outputs
 

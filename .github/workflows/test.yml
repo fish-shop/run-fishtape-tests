@@ -28,28 +28,71 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Install fish shell
         uses: fish-shop/install-fish-shell@720ad65b07b693d9332d73aaf811502196c1efb8 # v1.0.12
-      - name: Create test file
+      - name: Create passing tests
         run: |
-          cat << 'EOF' > test.fish
-          @test "passing test" (true) $status -eq 0
-          @test "passing test" (true) $status -eq 0
-          @test "passing test" (true) $status -eq 0
-          EOF
-      - name: Run fishtape tests
-        id: run-fishtape-tests
-        uses: ./
-      - name: Check fishtape installed
-        run: type -q fishtape
+          echo > test.fish
+          for count in (seq 1 3)
+              echo '@test "passing test" (true) $status -eq 0' >> test.fish
+          end
         shell: fish {0}
+      - name: Test passing tests
+        id: passing-tests
+        continue-on-error: true
+        uses: ./
+        with:
+          title: 'Passing tests summary'
+      - name: Check passing tests outcome
+        run: |
+          if test "${{ steps.passing-tests.outcome }}" != "success"
+              echo "Action is expected to succeed for file with passing tests"
+              exit 1
+          end
+        shell: fish {0}
+      - name: Create failing tests
+        run: |
+          echo > test.fish
+          for count in (seq 1 3)
+              echo '@test "failing test" (false) $status -eq 0' >> test.fish
+          end
+        shell: fish {0}
+      - name: Test failing tests
+        id: failing-tests
+        continue-on-error: true
+        uses: ./
+        with:
+          title: 'Failing tests summary'
+      - name: Check failing tests outcome
+        run: |
+          if test "${{ steps.failing-tests.outcome }}" != "failure"
+              echo "Action is expected to fail for file with failing tests"
+              exit 1
+          end
+        shell: fish {0}
+      - name: Create mixed passing/failing tests
+        run: |
+          echo > test.fish
+          for count in (seq 1 3)
+              echo '@test "passing test" (true) $status -eq 0' >> test.fish
+          end
+          for count in (seq 1 2)
+              echo '@test "failing test" (false) $status -eq 0' >> test.fish
+          end
+        shell: fish {0}
+      - name: Test mixed passing/failing tests
+        id: mixed-tests
+        continue-on-error: true
+        uses: ./
+        with:
+          title: 'Mixed tests summary'
       - name: Check output parameters
         env:
-          TOTAL: ${{ steps.run-fishtape-tests.outputs.total }}
-          PASSED: ${{ steps.run-fishtape-tests.outputs.passed }}
-          FAILED: ${{ steps.run-fishtape-tests.outputs.failed }}
+          TOTAL: ${{ steps.mixed-tests.outputs.total }}
+          PASSED: ${{ steps.mixed-tests.outputs.passed }}
+          FAILED: ${{ steps.mixed-tests.outputs.failed }}
         run: |
           set failures 0
 
-          set expected_total 3
+          set expected_total 5
           if test "$TOTAL" != "$expected_total"
               echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
               set failures (math $failures + 1)
@@ -59,16 +102,16 @@ jobs:
 
           set expected_passes 3
           if test "$PASSED" != "$expected_passes"
-            echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
-            set failures (math $failures + 1)
+              echo "Output parameter 'passed' should equal $expected_passes (got '$PASSED')"
+              set failures (math $failures + 1)
           else
               echo "Output parameter 'passed' equals expected value $expected_passes"
           end
 
-          set expected_failures 0
+          set expected_failures 2
           if test "$FAILED" != "$expected_failures"
-            echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
-            set failures (math $failures + 1)
+              echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
+              set failures (math $failures + 1)
           else
               echo "Output parameter 'failed' equals expected value $expected_failures"
           end

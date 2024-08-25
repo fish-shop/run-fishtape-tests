@@ -4,6 +4,10 @@ branding:
   icon: 'check-square'
   color: 'green'
 inputs:
+  title:
+    description: 'Title to display in job summary'
+    required: false
+    default: 'Test results'
   patterns:
     description: 'File patterns to match against when running tests'
     required: false
@@ -36,12 +40,14 @@ runs:
     - name: Run fishtape tests
       id: run-fishtape-tests
       env:
+        TITLE: ${{ inputs.title }}
         PATTERNS: ${{ inputs.patterns }}
         RAW_OUTPUT: ${{ inputs.raw-output }}
       run: |
         set -gx TERM xterm-256color
         set -gx FORCE_COLOR 2
 
+        set title "$TITLE"
         set raw_output (string escape --no-quoted -- $RAW_OUTPUT)
 
         for pattern in (string split --no-empty -- " " $PATTERNS)
@@ -65,18 +71,18 @@ runs:
         set failed (tail -n 4 output | sed -rn 's/^# fail ([[:digit:]]+)$/\1/p')
 
         for param in total passed failed
-          if test -z "$$param"
-            set $param 0
-          end
+            if test -z "$$param"
+                set $param 0
+            end
         end
 
         if test "$failed" = "0"
-          set result ":white_check_mark: Pass"
+            set result ":white_check_mark: Pass"
         else
-          set result ":x: Fail"
+            set result ":x: Fail"
         end
 
-        echo "### Test results" >> $GITHUB_STEP_SUMMARY
+        echo "### $title" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "| Test result :microscope: | Passed :white_check_mark: | Failed :x: |" >> $GITHUB_STEP_SUMMARY
         echo "|--------------------------|---------------------------|------------|" >> $GITHUB_STEP_SUMMARY
