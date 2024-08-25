@@ -30,7 +30,7 @@ jobs:
         uses: fish-shop/install-fish-shell@720ad65b07b693d9332d73aaf811502196c1efb8 # v1.0.12
       - name: Create passing tests
         run: |
-          echo > test.fish
+          echo -n > test.fish
           for count in (seq 1 3)
               echo '@test "passing test" (true) $status -eq 0' >> test.fish
           end
@@ -50,7 +50,7 @@ jobs:
         shell: fish {0}
       - name: Create failing tests
         run: |
-          echo > test.fish
+          echo -n > test.fish
           for count in (seq 1 3)
               echo '@test "failing test" (false) $status -eq 0' >> test.fish
           end
@@ -70,7 +70,7 @@ jobs:
         shell: fish {0}
       - name: Create mixed passing/failing tests
         run: |
-          echo > test.fish
+          echo -n > test.fish
           for count in (seq 1 3)
               echo '@test "passing test" (true) $status -eq 0' >> test.fish
           end
