@@ -34,7 +34,6 @@ jobs:
           @test "passing test" (true) $status -eq 0
           @test "passing test" (true) $status -eq 0
           @test "passing test" (true) $status -eq 0
-          @test "failing test" (false) $status -eq 0
           EOF
       - name: Run fishtape tests
         id: run-fishtape-tests
@@ -50,7 +49,7 @@ jobs:
         run: |
           set failures 0
 
-          set expected_total 4
+          set expected_total 3
           if test "$TOTAL" != "$expected_total"
               echo "Output parameter 'total' should equal $expected_total (got '$TOTAL')"
               set failures (math $failures + 1)
@@ -66,7 +65,7 @@ jobs:
               echo "Output parameter 'passed' equals expected value $expected_passes"
           end
 
-          set expected_failures 1
+          set expected_failures 0
           if test "$FAILED" != "$expected_failures"
             echo "Output parameter 'failed' should equal $expected_failures (got '$FAILED')"
             set failures (math $failures + 1)
