@@ -70,17 +70,7 @@ runs:
           end
         end
 
-        echo "total=$total" >> "$GITHUB_OUTPUT"
-        echo "passed=$passed" >> "$GITHUB_OUTPUT"
-        echo "failed=$failed" >> "$GITHUB_OUTPUT"
-      shell: fish {0}
-    - name: Generate job summary
-      env:
-        TOTAL: ${{ steps.run-fishtape-tests.outputs.total }}
-        PASSED: ${{ steps.run-fishtape-tests.outputs.passed }}
-        FAILED: ${{ steps.run-fishtape-tests.outputs.failed }}
-      run: |
-        if test "$FAILED" = "0"
+        if test "$failed" = "0"
           set result ":white_check_mark: Pass"
         else
           set result ":x: Fail"
@@ -90,5 +80,13 @@ runs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "| Test result :microscope: | Passed :white_check_mark: | Failed :x: |" >> $GITHUB_STEP_SUMMARY
         echo "|--------------------------|---------------------------|------------|" >> $GITHUB_STEP_SUMMARY
-        echo "| $result                  | $PASSED                   | $FAILED    |" >> $GITHUB_STEP_SUMMARY
+        echo "| $result                  | $passed                   | $failed    |" >> $GITHUB_STEP_SUMMARY
+
+        echo "total=$total" >> "$GITHUB_OUTPUT"
+        echo "passed=$passed" >> "$GITHUB_OUTPUT"
+        echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
+        if test "$failed" != "0"
+            exit 1
+        end
       shell: fish {0}
