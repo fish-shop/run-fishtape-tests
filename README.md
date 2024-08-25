@@ -25,7 +25,7 @@ Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/r
   uses: fish-shop/run-fishtape-tests@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-separated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
@@ -42,6 +42,9 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
   with:
     patterns: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
 ```
+
+> [!IMPORTANT]
+> The `?` wildcard character is [deprecated](https://fishshell.com/docs/current/language.html#wildcards-globbing) and can be disabled via the `fish` feature flag `qmark-noglob`. Support for the `?` wildcard may therefore be dependent upon the version of `fish` shell in use and/or the configuration of its feature flags.
 
 By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability. To disable this functionality and produce raw TAP output set `raw-output` to `'true'`:
 
@@ -61,7 +64,7 @@ Configure the action using the following inputs:
 |--------------|----------------------------------------|-----------------------|
 | `patterns`   | A space-separated list of file patterns to match against when running tests; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
 | `raw-output` | The string value `'true'` or `'false'` indicating whether to generate raw [TAP](https://testanything.org/) output or not; output is prettified using [tap-diff](https://github.com/axross/tap-diff) when `'false'` | `false` |
-| `title`      | The title to display in the job summary; can be used to distinguish multiple summaries generated from a single workflow  | `Test results` |
+| `title`      | The title to display in the [job summary](#job-summary); can be used to distinguish multiple summaries generated from a single workflow  | `Test results` |
 
 ## Outputs
 
