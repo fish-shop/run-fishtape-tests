@@ -25,7 +25,7 @@ Add a `uses` step to your GitHub [workflow](https://docs.github.com/en/actions/r
   uses: fish-shop/run-fishtape-tests@v2
 ```
 
-By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-seperated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
+By default, all files under `$GITHUB_WORKSPACE` with a `.fish` file extension are tested. To override the default behaviour, provide one or more space-separated pattern values to the `patterns` input. For example, to test all `.fish` files starting in the `tests` directory and descending into subdirectories:
 
 ```yaml
 - name: Run Fishtape tests
@@ -64,6 +64,7 @@ Configure the action using the following inputs:
 |--------------|----------------------------------------|-----------------------|
 | `patterns`   | A space-separated list of file patterns to match against when running tests; each pattern may include [wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard) and/or [brace expansions](https://fishshell.com/docs/current/language.html?highlight=brace+expansion#brace-expansion) | `**.fish` |
 | `raw-output` | The string value `'true'` or `'false'` indicating whether to generate raw [TAP](https://testanything.org/) output or not; output is prettified using [tap-diff](https://github.com/axross/tap-diff) when `'false'` | `false` |
+| `title`      | The title to display in the [job summary](#job-summary); can be used to distinguish multiple summaries generated from a single workflow  | `Test results` |
 
 ## Outputs
 
