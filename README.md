@@ -43,6 +43,9 @@ Each pattern value may include [wildcards](https://fishshell.com/docs/current/la
     patterns: tests/*.fish fixtures/**.fish {dir1,dir2}/**.fish ???-*.fish
 ```
 
+> [!IMPORTANT]
+> The `?` wildcard character is [deprecated](https://fishshell.com/docs/current/language.html#wildcards-globbing) and can be disabled via the `fish` feature flag `qmark-noglob`. Support for the `?` wildcard may therefore be dependent upon the version of `fish` shell in use and/or the configuration of its feature flags.
+
 By default, TAP output is piped to [tap-diff](https://github.com/axross/tap-diff) for improved readability. To disable this functionality and produce raw TAP output set `raw-output` to `'true'`:
 
 ```yaml
