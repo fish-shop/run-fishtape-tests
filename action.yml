@@ -18,7 +18,7 @@ inputs:
     default: 'false'
 outputs:
   total:
-    description: "Total number of tests executed"
+    description: "Total number of tests run"
     value: ${{ steps.run-fishtape-tests.outputs.total }}
   passed:
     description: "Number of tests passed"
