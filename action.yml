@@ -30,7 +30,7 @@ runs:
   using: 'composite'
   steps:
     - name: Install fisher
-      uses: fish-shop/install-plugin@514a3fc9a6847e3ac0c2ec608e874f9a1fc03405 # v2.3.98
+      uses: fish-shop/install-plugin@f01a04307901ba5f6d739dad509960071cc01f99 # v2.3.99
       with:
         plugin-manager: fisher
         plugins: jorgebucaran/fishtape
